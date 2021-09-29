@@ -1,0 +1,39 @@
+{
+  "name": "jcaillot/owasp-listener",
+  "type": "library",
+  "description": "Symfony Response Event Listener for OWASP headers",
+  "keywords": [
+    "Symfony",
+    "OWASP",
+    "response headers"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "jerome caillot",
+      "email": "jerome@chaman.ca"
+    }
+  ],
+  "require": {
+    "php": "^7.4 || ^8.0",
+    "symfony/http-kernel": "^5.3 || ^6.0"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^0.12.98",
+    "phpunit/phpunit": "^9.5",
+    "symfony/phpunit-bridge": "^5.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Chaman\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Chaman\\": "tests"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}
