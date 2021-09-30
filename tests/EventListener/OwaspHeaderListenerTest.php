@@ -27,20 +27,6 @@ class OwaspHeaderListenerTest extends TestCase
      */
     private ?HttpKernelInterface $kernel;
 
-    public function setUp(): void
-    {
-        $addedHeaders = [
-            'X-Content-Type-Option' => 'nosniff',
-            'Content-Type' => 'text/html; charset=utf-8',
-        ];
-        // the System Under Test:
-        $listener = new OwaspHeaderListener($addedHeaders);
-
-        $this->dispatcher = new EventDispatcher();
-        $this->dispatcher->addListener(KernelEvents::RESPONSE, [$listener, 'onKernelResponse']);
-        $this->kernel = $this->createMock(HttpKernelInterface::class);
-    }
-
     public function testHeadersAreInserted()
     {
         $response = new Response();
@@ -81,12 +67,24 @@ class OwaspHeaderListenerTest extends TestCase
         $this->assertFalse($headers->has('Content-Type'));
     }
 
+    protected function setUp(): void
+    {
+        $addedHeaders = [
+            'X-Content-Type-Option' => 'nosniff',
+            'Content-Type' => 'text/html; charset=utf-8',
+        ];
+        // the System Under Test:
+        $listener = new OwaspHeaderListener($addedHeaders);
+
+        $this->dispatcher = new EventDispatcher();
+        $this->dispatcher->addListener(KernelEvents::RESPONSE, [$listener, 'onKernelResponse']);
+        $this->kernel = $this->createMock(HttpKernelInterface::class);
+    }
 
     protected function tearDown(): void
     {
         $this->dispatcher = null;
         $this->kernel = null;
     }
-
 
 }
